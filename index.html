@@ -311,7 +311,7 @@ function assess(item, have){
   if (!have.weight) gaps.push("metal weight in kg");
   if (!have.origin) gaps.push(metals.includes("steel") && metals.length === 1
       ? "country of melt and pour" : "country of smelt and cast");
-  if (!have.docs)   gaps.push("retrievable supporting document");
+  if (!have.docs)   gaps.push("the mill certificate or supplier declaration on file");
 
   return {
     status: hit ? (CSMS_NAMED.includes(hit.code) ? "named" : "listed") : "suffix",

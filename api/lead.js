@@ -32,8 +32,11 @@ function resultsBlock(run, rawLines) {
   }
   const s = run.summary;
   const out = [
-    `${s.lines} lines checked. ${s.inScope} in scope. ${s.claims} where a 9903.82.03 claim`,
-    `under 15% is available. ${s.gapCount} data points you said you cannot evidence today.`,
+    `${s.lines} lines checked, ${s.inScope} in scope, ${s.claims} where the 15% test under heading`,
+    `9903.82.03 could remove the duty entirely.`,
+    ``,
+    `${s.gapCount} required data points are not marked as on file below. That is read from the three`,
+    `boxes on the page, so if you left them unticked everything shows as a gap.`,
     ``,
     `--------------------------------------------------------------------`,
     `YOUR LINES`,
@@ -48,10 +51,12 @@ function resultsBlock(run, rawLines) {
       out.push(`   listed only at: ${r.suffixes.join(", ")}`);
     if (r.matched && r.matched !== r.hts)
       out.push(`   matched provision: ${r.matched}`);
-    if (r.canClaim15 && (r.status === "listed" || r.status === "named" || r.status === "suffix"))
-      out.push(`   under 15% by weight would move this to 9903.82.03, no additional duty`);
+    if (r.canClaim15 && r.status === "suffix")
+      out.push(`   if your suffix is one of those, the 15% weight test decides whether 232 applies at all`);
+    else if (r.canClaim15 && (r.status === "listed" || r.status === "named"))
+      out.push(`   under 15% metal by weight, this moves to 9903.82.03 and carries no additional duty`);
     if (r.gaps && r.gaps.length)
-      out.push(`   missing: ${r.gaps.join(", ")}`);
+      out.push(`   not marked as on file: ${r.gaps.join(", ")}`);
   }
   out.push(``);
   return out;
@@ -167,6 +172,11 @@ export default async function handler(req, res) {
         `---`,
         ``,
         `Reply to this email with a part number if you want it checked against the current lists.`,
+        ``,
+        `If you would rather not run this in a spreadsheet, the pilot builds the per-part ledger for`,
+        `you: 250 part numbers, the supplier campaign run on your behalf, the entry-line data pack and`,
+        `an audit binder. $299 a month, three months prepaid, refunded if there is no usable ledger`,
+        `after 30 days. https://millproof.com/#pilot`,
         ``,
         `Tal Adari`,
         `Millproof - hello@millproof.com`,
