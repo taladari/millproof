@@ -98,7 +98,7 @@ export default async function handler(req, res) {
         `leaving it blank, because we have to record what was asked and what came back.`,
         `---`,
         ``,
-        `Reply to this email with the part that hurts most and I will look at it myself.`,
+        `Reply to this email with a part number if you want it checked against the current lists.`,
         ``,
         `Millproof is not a customs broker. We keep the records behind what you declare. You and`,
         `your licensed broker decide what gets filed.`,

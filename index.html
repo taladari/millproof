@@ -402,7 +402,7 @@ $("#emailForm").addEventListener("submit", async e => {
   stash.push(payload); localStorage.setItem("millproof_leads", JSON.stringify(stash));
   const done = $("#emailDone");
   done.textContent = ok
-    ? "Sent. The supplier template is in your inbox. Reply to it with the part that hurts most and I will look at it myself."
+    ? "Sent. The supplier request template is in your inbox, along with the list you pasted."
     : "That did not send. Email hello@millproof.com and I will send the template by hand.";
   done.classList.remove("hidden");
   $("#emailForm").reset();
