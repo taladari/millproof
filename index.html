@@ -82,18 +82,17 @@
 
 <main class="wrap">
 
-  <span class="deadline" style="margin-top:30px">⏱ Copper wire smelt-and-cast reporting starts 30 July 2026</span>
+  <span class="deadline" style="margin-top:30px">Copper wire smelt-and-cast reporting starts 30 July 2026</span>
 
-  <h1>The 15% claim is worth 50%.<br>Can you prove the kilograms?</h1>
+  <h1>Under 15% metal by weight, the duty is zero.<br>Over it, up to 50%.</h1>
 
   <p class="lede">Since 6 April 2026, Section&nbsp;232 applies to the <strong>full customs value</strong> of
-  719 listed HTSUS provisions - the applicable subheading plus up to 50%. There is one way out. If your
-  article is outside chapters 72-76 and <strong>the applicable metal is less than 15% of its weight</strong>,
-  it goes under heading 9903.82.03 at no additional duty.</p>
+  719 listed HTSUS provisions. The exception is heading 9903.82.03: an article outside chapters 72-76 whose
+  applicable metal is <strong>less than 15% of its weight</strong> carries no additional duty.</p>
 
-  <p class="lede">That claim is made per part number, and it rests on a weight you have to be able to prove -
-  plus the country of melt and pour or smelt and cast on every line. None of it is in your ERP. It is in your
-  suppliers' mill certificates.</p>
+  <p class="lede">The claim is made per part number. Net weights may already be in your ERP; the metal-only
+  weight and the country of melt and pour or smelt and cast usually are not. Those sit in supplier mill
+  certificates.</p>
 
   <p><a class="btn" href="#check">Run the free content-gap check</a>
      <span class="small muted" style="margin-left:10px">2 minutes · no signup · nothing leaves your browser</span></p>
@@ -108,8 +107,8 @@
   <!-- ============ GAP CHECK ============ -->
   <section id="check">
     <h2>Section 232 content-gap check</h2>
-    <p class="muted">Paste your part list. One line per part: an HTS code, then anything else you like
-    (part number, description). The check runs entirely in your browser - no upload, no account.</p>
+    <p class="muted">Paste your part list. One line per part: an HTS code, then whatever else is on the line
+    (part number, description). The check runs entirely in your browser. No upload, no account.</p>
 
     <div class="panel">
       <textarea id="lines" spellcheck="false" aria-label="Part list">7318.15.20, FS-4402, M8 flange bolt
@@ -146,8 +145,8 @@
 
       <div class="panel" style="margin-top:20px">
         <h3>Get the supplier request template</h3>
-        <p class="small muted">Sent immediately: the email we use to get metal weight and melt-and-pour data out of a
-        supplier that has ignored two previous requests. Your part list comes back with it so you have a record.</p>
+        <p class="small muted">Sent immediately: the request we use for metal weight and origin, including the
+        escalation version for suppliers who have not replied. Your part list comes back with it as a record.</p>
         <form id="emailForm" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
           <input type="email" id="email" required placeholder="you@company.com" style="flex:1;min-width:240px">
           <input type="text" id="company_url" tabindex="-1" autocomplete="off" aria-hidden="true"
@@ -182,8 +181,8 @@
       </div>
     </div>
     <p class="small muted" style="margin-top:14px">Scope changes three times a year at the BIS inclusion windows
-    (January, May, September). Millproof re-runs your catalogue against each new list and tells you which parts just
-    walked into scope.</p>
+    (January, May, September). Millproof re-runs your catalogue against each new list and reports which parts have
+    entered scope.</p>
   </section>
 
   <div class="rule"></div>
@@ -197,12 +196,12 @@
       <ul class="tight">
         <li>Set-up is a spreadsheet or a CSV export. No integration, no IT ticket.</li>
         <li>You keep everything produced, in open formats, whether or not you continue.</li>
-        <li>If there is no usable ledger 30 days in, the whole thing is refunded.</li>
+        <li>If there is no usable ledger 30 days in, it is refunded in full.</li>
       </ul>
       <p style="margin-top:16px"><a class="btn" id="pilotBtn"
           href="mailto:hello@millproof.com?subject=Pilot%20slot%20-%20invoice%20request&body=Company%3A%0ABilling%20contact%20and%20email%3A%0AApprox.%20part%20numbers%20in%20scope%3A%0A%0APlease%20send%20the%20invoice%20for%20%24897%20(3%20months%20at%20%24299%2C%20prepaid).%20We%20can%20pay%20by%3A%0A%20%20%5B%20%5D%20ACH%20%20%20%5B%20%5D%20wire%20%20%20%5B%20%5D%20card%0A">Request a pilot invoice</a>
-        <span class="small muted" style="margin-left:8px">Invoice within the hour - ACH, wire or card.
-        Six slots. Starting order is the order they are paid.</span></p>
+        <span class="small muted" style="margin-left:8px">Invoice within one business day, payable by ACH, wire or
+        card. Six slots. Starting order is the order they are paid.</span></p>
     </div>
   </section>
 
@@ -221,7 +220,7 @@
 
   <!-- ============ FAQ ============ -->
   <section>
-    <h2>Questions people actually ask</h2>
+    <h2>Questions</h2>
 
     <details><summary>Isn't this my broker's job?</summary>
     <p>Your broker files with the data you give them. They cannot invent the metal weight of your bracket or the
@@ -229,17 +228,19 @@
     obligation under 19 CFR 163 sits with you as importer of record, for five years from entry.</p></details>
 
     <details><summary>What if suppliers never answer?</summary>
-    <p>Some won't. The 15% threshold and reduced tiers mean their answer usually lowers the duty on your own invoice,
-    which is a better lever than goodwill - and when it fails, what a records demand tests is documented diligence:
-    who was asked, when, what came back, what is stale. That record is the product, complete data or not.</p></details>
+    <p>Some will not. The 15% threshold and the reduced tiers mean a supplier's answer often lowers the duty on your
+    own invoice, so the request carries a financial reason rather than a favour. Where it still fails, what a records
+    demand tests is documented diligence: who was asked, when, what came back, what has gone stale. The ledger is that
+    record whether or not every supplier replied.</p></details>
 
     <details><summary>What do you need from us to start?</summary>
-    <p>A list of part numbers with HTS codes and supplier names. Anything else - existing mill certificates, BOMs,
-    weights - speeds it up and is not required.</p></details>
+    <p>A list of part numbers with HTS codes and supplier names. Existing mill certificates, BOMs or weights speed
+    it up but are not required.</p></details>
 
     <details><summary>Where does our data live?</summary>
-    <p>Your ledger and documents sit in an isolated per-tenant store, exportable to CSV and PDF at any time, deleted
-    on request within 30 days of cancellation. Nothing is used to train anything.</p></details>
+    <p>In your own workspace, separated from every other customer's, exportable to CSV and PDF at any time and deleted
+    on request within 30 days of cancellation. Nothing is used to train models. Pilot customers get the specifics of
+    where it is hosted in writing before anything is uploaded.</p></details>
 
     <details><summary>What happens if the tariff goes away?</summary>
     <p>The obligation to substantiate what you already declared does not go with it. Records stay demandable for five
