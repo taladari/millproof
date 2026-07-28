@@ -43,9 +43,23 @@ each list and its code count so a suspicious diff is obvious.
 
 Six placeholders, all in `index.html` unless noted:
 
+The lead form posts to `api/lead.js`, a Vercel function that emails the lead to you and
+auto-replies to the visitor with the supplier request template. It needs three environment
+variables in the Vercel project, and a sending domain verified in Resend:
+
+| Env var | Value |
+|---|---|
+| `RESEND_API_KEY` | from resend.com/api-keys |
+| `LEAD_TO` | `hello@millproof.com` (optional, this is the default) |
+| `MAIL_FROM` | `Millproof <notify@send.millproof.com>` (optional, this is the default) |
+
+In Resend, add the domain `send.millproof.com` and publish the SPF and DKIM records it gives
+you. Do not use the root domain: Google owns MX there, and keeping sending on a subdomain
+protects the root's reputation. Then send yourself a test through the live form before any
+outreach goes out.
+
 | Placeholder | What to put there |
 |---|---|
-| `FORM_ENDPOINT` | Formspree or Tally endpoint for the results-and-template capture |
 | `PILOT_URL` | Stripe payment link, $299/month, 3 months prepaid |
 | `REPLACE@millproof.com` (2 places) | `hello@millproof.com` |
 | Domain | `millproof.com` - registered 2026-07-27 |
