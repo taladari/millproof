@@ -17,6 +17,46 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
 const esc = s => String(s).replace(/[&<>"']/g, c =>
   ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
+const STATUS_TEXT = {
+  named: "in scope, named by CBP",
+  listed: "in scope",
+  suffix: "depends on statistical suffix",
+  out: "not listed",
+  none: "no HTS code found",
+};
+
+/** The results the visitor saw, as plain text they can forward or file. */
+function resultsBlock(run, rawLines) {
+  if (!run || !Array.isArray(run.rows)) {
+    return [`The list you checked:`, ``, rawLines.trim(), ``];
+  }
+  const s = run.summary;
+  const out = [
+    `${s.lines} lines checked. ${s.inScope} in scope. ${s.claims} where a 9903.82.03 claim`,
+    `under 15% is available. ${s.gapCount} data points you said you cannot evidence today.`,
+    ``,
+    `--------------------------------------------------------------------`,
+    `YOUR LINES`,
+    `--------------------------------------------------------------------`,
+  ];
+  for (const r of run.rows) {
+    out.push(``);
+    out.push(`${r.n}. ${r.raw}`);
+    out.push(`   ${r.hts || "no code"}  ${STATUS_TEXT[r.status] || r.status}` +
+             (r.metals && r.metals.length ? `  (${r.metals.join(" + ")})` : ""));
+    if (r.status === "suffix" && r.suffixes.length)
+      out.push(`   listed only at: ${r.suffixes.join(", ")}`);
+    if (r.matched && r.matched !== r.hts)
+      out.push(`   matched provision: ${r.matched}`);
+    if (r.canClaim15 && (r.status === "listed" || r.status === "named" || r.status === "suffix"))
+      out.push(`   under 15% by weight would move this to 9903.82.03, no additional duty`);
+    if (r.gaps && r.gaps.length)
+      out.push(`   missing: ${r.gaps.join(", ")}`);
+  }
+  out.push(``);
+  return out;
+}
+
 async function send(payload) {
   const r = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -49,6 +89,7 @@ export default async function handler(req, res) {
   if (!EMAIL_RE.test(email)) return res.status(400).json({ ok: false, error: "invalid email" });
   if (!lines.trim()) return res.status(400).json({ ok: false, error: "no part lines" });
 
+  const run = body.run && typeof body.run === "object" ? body.run : null;
   const to = process.env.LEAD_TO || "hello@millproof.com";
   const from = process.env.MAIL_FROM || "Millproof <notify@send.millproof.com>";
   const domain = email.split("@")[1];
@@ -61,7 +102,13 @@ export default async function handler(req, res) {
       to: [to],
       reply_to: email,
       subject: `Gap check: ${domain} (${lineCount} lines)`,
-      text: `${email}\n${lineCount} lines pasted at ${body.at || "unknown time"}\n\n${lines}\n`,
+      text: [
+        email,
+        `${lineCount} lines pasted at ${body.at || "unknown time"}`,
+        run ? `${run.summary.inScope} in scope, ${run.summary.claims} with a 15% claim available, ${run.summary.gapCount} gaps` : "no run data",
+        "",
+        lines,
+      ].join("\n"),
     });
 
     // 2. the promised reply, to the visitor
@@ -69,14 +116,18 @@ export default async function handler(req, res) {
       from,
       to: [email],
       reply_to: to,
-      subject: "Your Section 232 content-gap check, and the supplier request email",
+      subject: `Your Section 232 gap check: ${run ? run.summary.inScope : "?"} of ${lineCount} lines in scope`,
       text: [
-        `You checked ${lineCount} part lines. The scope those were matched against is U.S. Note 16(c)`,
-        `to subchapter III of chapter 99, HTSUS, Revision 12 (2026).`,
+        ...resultsBlock(run, lines),
+        `Scope source: U.S. Note 16(c) to subchapter III of chapter 99, HTSUS,`,
+        `${(run && run.revision) || "Revision 12 (2026)"}. Lists change three times a year at the`,
+        `BIS inclusion windows in January, May and September.`,
         ``,
-        `Below is the request we use to get metal weight and origin out of a supplier. It works`,
-        `better than asking for mill certs because it names the four fields and states the`,
-        `consequence in money.`,
+        `--------------------------------------------------------------------`,
+        `THE SUPPLIER REQUEST`,
+        `--------------------------------------------------------------------`,
+        ``,
+        `Fill in the bracketed parts and send it to whoever holds the mill certificates.`,
         ``,
         `---`,
         `Subject: Metal content data needed for [PART NUMBERS] - affects duty on your next shipment`,
@@ -98,10 +149,31 @@ export default async function handler(req, res) {
         `leaving it blank, because we have to record what was asked and what came back.`,
         `---`,
         ``,
+        `--------------------------------------------------------------------`,
+        `THE ESCALATION, AFTER TWO WEEKS OF SILENCE`,
+        `--------------------------------------------------------------------`,
+        ``,
+        `Send this to the commercial contact, not the quality contact, and copy your own buyer.`,
+        ``,
+        `---`,
+        `Subject: [SUPPLIER] - metal content data outstanding, [N] parts`,
+        ``,
+        `We asked twice, on [DATE] and [DATE], for metal weight and country of melt or smelt on`,
+        `the parts listed. These are now being declared with unknown origin, at the higher duty`,
+        `treatment, and the cost difference is being tracked against this supplier.`,
+        ``,
+        `The request is four fields and one attachment. Whoever holds the mill certificates can`,
+        `answer it in ten minutes.`,
+        `---`,
+        ``,
         `Reply to this email with a part number if you want it checked against the current lists.`,
         ``,
-        `Millproof is not a customs broker. We keep the records behind what you declare. You and`,
-        `your licensed broker decide what gets filed.`,
+        `Tal Adari`,
+        `Millproof - hello@millproof.com`,
+        ``,
+        `Millproof is not a customs broker and performs no customs business. We do not classify`,
+        `merchandise and we file nothing with CBP. You and your licensed broker decide what gets`,
+        `declared; what we keep is the evidence behind it.`,
       ].join("\n"),
     });
 

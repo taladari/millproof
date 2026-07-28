@@ -323,15 +323,21 @@ function assess(item, have){
   };
 }
 
+let lastRun = null;   // what the visitor saw, so the emailed copy matches it exactly
+
 function render(){
   const items = parseLines($("#lines").value);
   const have = { weight:$("#hasWeight").checked, origin:$("#hasOrigin").checked, docs:$("#hasDocs").checked };
   const tbody = $("#table").querySelector("tbody");
   tbody.innerHTML = "";
   let inScope = 0, gapCount = 0, claims = 0;
+  const rows = [];
 
   items.forEach((item, i) => {
     const a = assess(item, have);
+    rows.push({ n:i+1, raw:item.raw, hts:item.hts, status:a.status, metals:a.metals,
+                matched:a.matched || null, suffixes:a.suffixes || [], gaps:a.gaps,
+                canClaim15: !!a.canClaim15 });
     const counted = a.status === "listed" || a.status === "named" || a.status === "suffix";
     if (counted){ inScope++; gapCount += a.gaps.length; if (a.canClaim15) claims++; }
 
@@ -367,6 +373,9 @@ function render(){
            <td>${tag}</td><td>${detail}</td><td>${gaps}</td></tr>`);
   });
 
+  lastRun = { rows, summary:{ lines:items.length, inScope, claims, gapCount },
+              revision: SCOPE.source.revision };
+
   $("#kpi").innerHTML = `
     <div><b>${items.length}</b><span>lines checked</span></div>
     <div><b>${inScope}</b><span>in scope</span></div>
@@ -391,7 +400,7 @@ $("#emailForm").addEventListener("submit", async e => {
   e.preventDefault();
   const email = $("#email").value.trim();
   const payload = { email, lines: $("#lines").value, at: new Date().toISOString(),
-                    company_url: $("#company_url").value };
+                    company_url: $("#company_url").value, run: lastRun };
   let ok = true;
   if (FORM_ENDPOINT){
     try{
