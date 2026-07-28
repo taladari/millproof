@@ -308,10 +308,10 @@ function assess(item, have){
   const fields = [...new Set(metals.flatMap(m => SCOPE.rules.reporting[m]))];
 
   const gaps = [];
-  if (!have.weight) gaps.push("metal weight in kg");
+  if (!have.weight) gaps.push("metal weight (kg)");
   if (!have.origin) gaps.push(metals.includes("steel") && metals.length === 1
       ? "country of melt and pour" : "country of smelt and cast");
-  if (!have.docs)   gaps.push("the mill certificate or supplier declaration on file");
+  if (!have.docs)   gaps.push("supporting mill certificate");
 
   return {
     status: hit ? (CSMS_NAMED.includes(hit.code) ? "named" : "listed") : "suffix",
@@ -341,7 +341,7 @@ function render(){
     const counted = a.status === "listed" || a.status === "named" || a.status === "suffix";
     if (counted){ inScope++; gapCount += a.gaps.length; if (a.canClaim15) claims++; }
 
-    const tag = a.status === "named"  ? '<span class="tag conf">in scope · named by CBP</span>'
+    const tag = a.status === "named"  ? '<span class="tag conf">in scope · CSMS #69252300</span>'
               : a.status === "listed" ? '<span class="tag in">in scope</span>'
               : a.status === "suffix" ? '<span class="tag in">depends on suffix</span>'
               : a.status === "none"   ? '<span class="tag out">no HTS</span>'

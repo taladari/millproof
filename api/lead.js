@@ -18,7 +18,7 @@ const esc = s => String(s).replace(/[&<>"']/g, c =>
   ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 const STATUS_TEXT = {
-  named: "in scope, named by CBP",
+  named: "in scope, and named in CBP CSMS #69252300",
   listed: "in scope",
   suffix: "depends on statistical suffix",
   out: "not listed",
@@ -32,11 +32,11 @@ function resultsBlock(run, rawLines) {
   }
   const s = run.summary;
   const out = [
-    `${s.lines} lines checked, ${s.inScope} in scope, ${s.claims} where the 15% test under heading`,
-    `9903.82.03 could remove the duty entirely.`,
+    `${s.lines} lines checked, ${s.inScope} in scope, and ${s.claims} where the 15% weight test`,
+    `could remove the duty entirely under heading 9903.82.03.`,
     ``,
-    `${s.gapCount} required data points are not marked as on file below. That is read from the three`,
-    `boxes on the page, so if you left them unticked everything shows as a gap.`,
+    `${s.gapCount} required data points are not marked as on file. That is read from the three boxes`,
+    `on the page, so if you left them unticked everything shows as a gap.`,
     ``,
     `--------------------------------------------------------------------`,
     `YOUR LINES`,
@@ -54,7 +54,9 @@ function resultsBlock(run, rawLines) {
     if (r.canClaim15 && r.status === "suffix")
       out.push(`   if your suffix is one of those, the 15% weight test decides whether 232 applies at all`);
     else if (r.canClaim15 && (r.status === "listed" || r.status === "named"))
-      out.push(`   under 15% metal by weight, this moves to 9903.82.03 and carries no additional duty`);
+      out.push(r.metals && r.metals.length > 1
+        ? `   under 15% by aggregate weight of ${r.metals.join(" + ")}, this moves to 9903.82.03, no added duty`
+        : `   under 15% metal by weight, this moves to 9903.82.03 and carries no additional duty`);
     if (r.gaps && r.gaps.length)
       out.push(`   not marked as on file: ${r.gaps.join(", ")}`);
   }
@@ -184,7 +186,7 @@ export default async function handler(req, res) {
         `Millproof is not a customs broker and performs no customs business. We do not classify`,
         `merchandise and we file nothing with CBP. You and your licensed broker decide what gets`,
         `declared; what we keep is the evidence behind it.`,
-      ].join("\n"),
+      ].join("\n").replace(/\n{3,}/g, "\n\n"),
     });
 
     return res.status(200).json({ ok: true });
