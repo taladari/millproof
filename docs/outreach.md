@@ -12,28 +12,50 @@ Rules that apply to every message below:
 
 ---
 
-## 1. LinkedIn direct message (25 sends)
+## 1. Cold email to named compliance staff (25 sends)
 
-> Subject line equivalent - first sentence has to survive a preview pane.
+Sent one at a time from `hello@millproof.com` in Gmail, never through Resend and never merged.
+No social platform is involved, and nothing here requires a personal profile: the sender is
+Millproof, and the signature carries the company, not a career.
+
+**Deliverability:** a new domain sending 25 cold emails in one day is how a domain gets burned.
+Send 6 to 8 a day across four days. Plain text, one link, no images, no tracking pixel.
+
+**US commercial email rules:** the message must carry a real physical postal address and a
+working way to opt out, and the subject must not mislead. Both are in the signature below. Keep
+them there.
 
 **Message**
 
-> Copper wire smelt-and-cast reporting hit ACE on 30 July, and since April the metal weight in
-> kg has to ride on the entry line as a second quantity. Most of the compliance folks I have
-> spoken to can produce the HTS instantly and the kilograms not at all, because the number
-> lives in a supplier's mill cert.
+> **Subject: metal weight on your [fastener / enclosure / HVAC] entry lines**
 >
-> I built a free check that takes a pasted part list and shows which lines need what, and
-> which of those you cannot evidence today: [link]
+> Since April, Section 232 applies to the full customs value of 719 HTSUS provisions, and the
+> aggregate metal weight in kilograms now rides on the entry line as a second quantity. Copper
+> smelt and cast joined ACE on 30 July, with live error codes.
 >
-> It runs in your browser, nothing is uploaded, and there is no signup. If it tells you
-> something you did not already know, I would like to hear which line.
+> The part most people can answer instantly is the HTS. The part almost nobody can answer is
+> the kilograms, because that number lives in a supplier's mill certificate.
+>
+> There is a free check here that takes a pasted part list and returns which lines are in
+> scope, which need what, and which of those you cannot evidence today: [link]
+>
+> It runs entirely in the browser. Nothing is uploaded and there is no signup. If it tells you
+> something you did not already know, I would like to hear which line it was.
+>
+> Millproof
+> [physical postal address]
+> Reply with "no" and you will not hear from us again.
 
-**Follow-up, 3 days later, once:**
+**Follow-up, 3 days later, once, on the same thread:**
 
-> Following up once and then I will leave you alone - did the check flag anything on your
-> fastener or enclosure lines? The gap I keep seeing is melt-and-pour on parts bought through
-> a distributor, where the mill is two steps away.
+> One follow-up and then I will leave it. Did the check flag anything on your [category] lines?
+> The gap that keeps showing up is melt and pour on parts bought through a distributor, where
+> the mill is two steps upstream and nobody has ever been asked.
+
+**Finding the 25:** company sites list trade compliance and logistics staff by name; Hunter and
+Apollo both have free tiers that verify an address pattern. Import records are public, so the
+importers of in-scope goods are discoverable. Do not buy a list and do not send to a scraped
+address you have not verified.
 
 ---
 

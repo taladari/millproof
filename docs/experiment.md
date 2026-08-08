@@ -34,7 +34,7 @@ Hard stop at 10 hours. Overrun is itself a fail signal - this is meant to be a c
 
 | Item | Planned | Actual |
 |---|---|---|
-| LinkedIn Premium, one month | $99 | not bought, no messages sent yet |
+| LinkedIn Premium (dropped, no social outreach) | $99 | $0, not needed |
 | Domains (`millproof.com`, `taladari.com`) | $12 | ~$25-30 |
 | Extraction and drafting tokens | $20 | $0 |
 | Hosting: Vercel, Resend, GitHub, Payoneer | $0 | $0, all free tiers |
@@ -55,12 +55,13 @@ A **real target buyer** is a named individual, at a named US company, where:
   materials, and
 - the message is sent to them directly - not a group blast, not a company inbox.
 
-Target: **25 sent, ≥20 qualifying**. Sourcing: ICPA member directory, LinkedIn search by title
-plus industry (fasteners, HVAC, appliances, furniture, e-bikes, machinery), and the exhibitor
-lists of any 2026 metals or fastener trade show, which are public.
+Target: **25 sent, ≥20 qualifying**. Sourcing: company websites, public import records, and
+association member lists. No purchased lists.
 
-Channel mix: 25 direct messages, 1 ICPA email-list post, and a free-tool offer to ~30 customs
-brokers who publish CSMS explainers to importer mailing lists. No organic social posting.
+Channel mix: 25 one-to-one cold emails, 1 ICPA email-list post, and a free-tool offer to ~30
+customs brokers who publish CSMS explainers. No social platform is used and no personal profile
+is involved: everything is sent as Millproof from `hello@millproof.com`. The founder is
+currently employed elsewhere and this experiment must not require him to be publicly visible.
 Everything asynchronous; no calls are booked or needed to reach the threshold.
 
 ## Pass / fail
