@@ -85,10 +85,27 @@ offer and a different segment. One re-run only. A second inconclusive week is a 
 | Completion | Form submission carrying non-example part lines (the default sample lines do not count) |
 | Pilot | Money received and settled - ACH, wire, PayPal or card, any rail. An issued invoice is not a pilot. A verbal yes is not a pilot. A signed order form is not a pilot. |
 
-Because pilots are invoiced rather than checked out, and US accounts payable moves at its own
-pace, the **money condition is judged on 2026-08-09** - seven days for payment to clear. The
-completion condition is still judged on 2026-08-02. This is a payment-rail allowance, not a
-softer threshold: the number is still three, and it is still cash.
+## Re-dated 2026-08-08, thresholds unchanged
+
+Nothing was sent in the first window. Payoneer has been stuck for over two weeks and the whole
+test was queued behind it, wrongly: the reach half never needed a payment rail. The numbers
+below are not softened. The two conditions are now judged separately, because they depend on
+different things.
+
+**Interest.** Needs only the page and the sends. Send by **2026-08-10**, judged **2026-08-17**:
+6 completions out of 25.
+
+**Money.** Needs an invoice rail, which does not have to be Payoneer. A wire to an Israeli USD
+account works today, as does a PayPal invoice. Judged **7 days after the first invoice is
+issued**, hard stop **2026-08-31**: 3 pilots, $2,691 collected and settled.
+
+**New founder-side kill, and the one that matters.** If the 25 messages are not sent by
+**2026-08-12**, the idea dies that day. Cause of death: not executed. That is a legitimate way
+for an idea to end and it goes in the graveyard with that wording, not disguised as a market
+verdict. An idea nobody will spend three hours testing is not an idea, whatever its merits.
+
+The copper hook has expired. The replacement opening is that the first entries under the new
+copper rules are being filed now and CBP has live ACE error codes for content reporting.
 
 Rule: the thresholds above are frozen. If the result is a fail, the obituary goes into
 `../escape-room/GRAVEYARD.md` the same day and the idea is finished.
