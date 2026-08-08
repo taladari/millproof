@@ -30,17 +30,21 @@ Only the third is the real test. The first two are how we earn the right to ask.
 
 Hard stop at 10 hours. Overrun is itself a fail signal - this is meant to be a cheap test.
 
-## Budget - $131
+## Budget - $131 planned, ~$30 actually spent as of 2026-08-08
 
-| Item | Cost |
-|---|---|
-| LinkedIn Premium, one month | $99 |
-| Domain (`millproof.com`, first year) | $12 |
-| Extraction and drafting tokens | $20 |
-| Hosting (static page, free tier) | $0 |
-| **Total** | **$131** |
+| Item | Planned | Actual |
+|---|---|---|
+| LinkedIn Premium, one month | $99 | not bought, no messages sent yet |
+| Domains (`millproof.com`, `taladari.com`) | $12 | ~$25-30 |
+| Extraction and drafting tokens | $20 | $0 |
+| Hosting: Vercel, Resend, GitHub, Payoneer | $0 | $0, all free tiers |
+| **Total** | **$131** | **~$30** |
 
-Ceiling is $300. Nothing here is a recurring commitment.
+Ceiling is $300. Google Workspace at about €8.10/month is a real recurring cost but it belongs
+to the operator identity, not to this experiment, and it survives whatever happens here.
+
+There is no sunk cost to defend. The only question is whether the next three hours are worth
+spending.
 
 ## Reach - who counts
 
